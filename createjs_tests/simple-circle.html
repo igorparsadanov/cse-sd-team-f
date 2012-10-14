@@ -1,0 +1,103 @@
+<script src="http://code.createjs.com/easeljs-0.5.0.min.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.createjs.com/easeljs-0.5.0.min.js"></script>
+
+    <script>
+		var KEYCODE_LEFT = 37; 	//usefull keycode
+		var KEYCODE_RIGHT = 39; 	//usefull keycode
+		var KEYCODE_UP = 38; 	//usefull keycode
+		var KEYCODE_DOWN = 40; 	//usefull keycode
+
+		var my_circle;
+		
+		function Circle(x,y){
+			var shape = new createjs.Shape();
+			shape.graphics.beginFill("orange").drawCircle(0,0,20);
+			shape.x=x;
+			shape.y=y;
+			
+			this.getShape = function(){
+				return shape;
+			};
+			
+			this.moveRight = function(){
+				if(shape.x<470){
+					shape.x=shape.x+20;
+				}
+				
+			};
+			
+			this.moveLeft = function(){
+				if(shape.x>30){
+					shape.x=shape.x-20;
+				}
+			};
+			
+			this.moveDown = function(){
+				if(shape.y<270){
+					shape.y=shape.y+20;
+				}
+			};
+			
+			this.moveUp = function(){
+				if(shape.y>30){
+					shape.y=shape.y-20;
+				}
+			};
+			
+			
+		}
+	
+        function init() {
+            var stage = new createjs.Stage("demoCanvas");
+				
+			my_circle = new Circle(30,30);
+			stage.addChild(my_circle.getShape());
+			stage.update();
+			
+			document.onkeydown = handleKeyDown;
+			createjs.Ticker.addListener(stage);
+
+			
+        }
+		
+		
+		
+		function handleKeyDown(e) {
+			
+			if (!e) { var e = window.event; }
+			switch (e.keyCode) {
+				
+				case KEYCODE_LEFT:
+					my_circle.moveLeft();
+					break;
+				
+				case KEYCODE_RIGHT:
+					my_circle.moveRight();
+					break;
+					
+				case KEYCODE_DOWN:
+					my_circle.moveDown();
+					break;
+
+				case KEYCODE_UP:
+					my_circle.moveUp();
+					break;
+
+			}
+			
+		}
+
+
+		
+		
+    </script>
+</head>
+<body onLoad="init();">
+    <canvas id="demoCanvas" width="500" height="300">
+        alternate content
+    </canvas>
+</body>
+</html>
